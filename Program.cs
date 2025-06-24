@@ -10,22 +10,15 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите фамилию: ");
-            string surname = Console.ReadLine();
-            Console.Write("Введите имя: ");
-            string name = Console.ReadLine();
-            Console.Write("Введите должность: ");
-            string position = Console.ReadLine();
-            Console.Write("Введите стаж (в годах): ");
-            int experience = Convert.ToInt32(Console.ReadLine());
+            Invoice invoice = new Invoice(123456, "Иван Иванов", "ООО Поставщик");
+            invoice.SetOrder("Ноутбук", 5);
 
-            Employee employee = new Employee(surname, name);
-            var (salary, tax) = employee.CalculateSalaryAndTax(position, experience);
+            Console.Write("Введите цену за единицу: ");
+            double price = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine($"Сотрудник: {surname} {name}");
-            Console.WriteLine($"Должность: {position}");
-            Console.WriteLine($"Оклад: {salary:F2}");
-            Console.WriteLine($"Налог: {tax:F2}");
+            var (withVAT, withoutVAT) = invoice.CalculateCost(price);
+            Console.WriteLine($"Стоимость без НДС: {withoutVAT:F2}");
+            Console.WriteLine($"Стоимость с НДС: {withVAT:F2}");
         }
     }
 }
