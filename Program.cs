@@ -10,15 +10,17 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Invoice invoice = new Invoice(123456, "Иван Иванов", "ООО Поставщик");
-            invoice.SetOrder("Ноутбук", 5);
+            Console.Write("Введите логин: ");
+            string login = Console.ReadLine();
+            Console.Write("Введите имя: ");
+            string name = Console.ReadLine();
+            Console.Write("Введите фамилию: ");
+            string surname = Console.ReadLine();
+            Console.Write("Введите возраст: ");
+            int age = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Введите цену за единицу: ");
-            double price = Convert.ToDouble(Console.ReadLine());
-
-            var (withVAT, withoutVAT) = invoice.CalculateCost(price);
-            Console.WriteLine($"Стоимость без НДС: {withoutVAT:F2}");
-            Console.WriteLine($"Стоимость с НДС: {withVAT:F2}");
+            User user = new User(login, name, surname, age);
+            user.ShowInfo();
         }
     }
 }
