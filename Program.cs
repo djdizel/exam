@@ -10,6 +10,10 @@ namespace exam
     {
         static void Main(string[] args)
         {
+            MyClass myClassOb = new MyClass();
+            myClassOb.ShowInterfaceA();
+            myClassOb.ShowInterfaceB();
+            myClassOb.ShowInterfaceC();
         }
     }
 }
