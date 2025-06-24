@@ -10,13 +10,22 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Point p1 = new Point(0, 0, "A");
-            Point p2 = new Point(0, 3, "B");
-            Point p3 = new Point(4, 0, "C");
-            Point p4 = new Point(4, 3, "D");
+            Address address = new Address
+            {
+                Index = "220000",
+                Country = "Беларусь",
+                City = "Минск",
+                Street = "Главная улица",
+                House = 10,
+                Apartment = 5
+            };
 
-            Figure figure = new Figure(p1, p2, p3, p4);
-            figure.PerimeterCalculator();
+            Console.WriteLine($"Индекс: {address.Index}");
+            Console.WriteLine($"Страна: {address.Country}");
+            Console.WriteLine($"Город: {address.City}");
+            Console.WriteLine($"Улица: {address.Street}");
+            Console.WriteLine($"Дом: {address.House}");
+            Console.WriteLine($"Квартира: {address.Apartment}");
         }
     }
 }
