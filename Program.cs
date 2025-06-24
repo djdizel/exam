@@ -10,25 +10,22 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Converter converter = new Converter(2.5, 3.0, 0.035);
+            Console.Write("Введите фамилию: ");
+            string surname = Console.ReadLine();
+            Console.Write("Введите имя: ");
+            string name = Console.ReadLine();
+            Console.Write("Введите должность: ");
+            string position = Console.ReadLine();
+            Console.Write("Введите стаж (в годах): ");
+            int experience = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Введите сумму в BYN: ");
-            double byn = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"BYN в USD: {converter.ConvertBYNtoUSD(byn):F2}");
-            Console.WriteLine($"BYN в EUR: {converter.ConvertBYNtoEUR(byn):F2}");
-            Console.WriteLine($"BYN в RUB: {converter.ConvertBYNtoRUB(byn):F2}");
+            Employee employee = new Employee(surname, name);
+            var (salary, tax) = employee.CalculateSalaryAndTax(position, experience);
 
-            Console.Write("Введите сумму в USD: ");
-            double usd = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"USD в BYN: {converter.ConvertUSDtoBYN(usd):F2}");
-
-            Console.Write("Введите сумму в EUR: ");
-            double eur = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"EUR в BYN: {converter.ConvertEURtoBYN(eur):F2}");
-
-            Console.Write("Введите сумму в RUB: ");
-            double rub = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine($"RUB в BYN: {converter.ConvertRUBtoBYN(rub):F2}");
+            Console.WriteLine($"Сотрудник: {surname} {name}");
+            Console.WriteLine($"Должность: {position}");
+            Console.WriteLine($"Оклад: {salary:F2}");
+            Console.WriteLine($"Налог: {tax:F2}");
         }
     }
 }
