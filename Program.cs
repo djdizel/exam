@@ -10,22 +10,25 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Address address = new Address
-            {
-                Index = "220000",
-                Country = "Беларусь",
-                City = "Минск",
-                Street = "Главная улица",
-                House = 10,
-                Apartment = 5
-            };
+            Converter converter = new Converter(2.5, 3.0, 0.035);
 
-            Console.WriteLine($"Индекс: {address.Index}");
-            Console.WriteLine($"Страна: {address.Country}");
-            Console.WriteLine($"Город: {address.City}");
-            Console.WriteLine($"Улица: {address.Street}");
-            Console.WriteLine($"Дом: {address.House}");
-            Console.WriteLine($"Квартира: {address.Apartment}");
+            Console.Write("Введите сумму в BYN: ");
+            double byn = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine($"BYN в USD: {converter.ConvertBYNtoUSD(byn):F2}");
+            Console.WriteLine($"BYN в EUR: {converter.ConvertBYNtoEUR(byn):F2}");
+            Console.WriteLine($"BYN в RUB: {converter.ConvertBYNtoRUB(byn):F2}");
+
+            Console.Write("Введите сумму в USD: ");
+            double usd = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine($"USD в BYN: {converter.ConvertUSDtoBYN(usd):F2}");
+
+            Console.Write("Введите сумму в EUR: ");
+            double eur = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine($"EUR в BYN: {converter.ConvertEURtoBYN(eur):F2}");
+
+            Console.Write("Введите сумму в RUB: ");
+            double rub = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine($"RUB в BYN: {converter.ConvertRUBtoBYN(rub):F2}");
         }
     }
 }
