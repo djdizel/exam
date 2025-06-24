@@ -10,6 +10,17 @@ namespace exam
     {
         static void Main(string[] args)
         {
+            Player player = new Player();
+            IPlayable playable = player;
+            IRecodable recordable = player;
+
+            playable.Play();
+            playable.Pause();
+            playable.Stop();
+
+            recordable.Record();
+            recordable.Pause();
+            recordable.Stop();
         }
     }
 }
