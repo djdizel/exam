@@ -10,27 +10,30 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите размер массива: ");
-            int size = Convert.ToInt32(Console.ReadLine());
-
-            MyArray myArray = new MyArray(size);
-            int i;
-            for (i = 0; i < size; i++)
+            try
             {
-                Console.Write("Введите элемент [" + i + "]: ");
-                myArray.SetElement(i, Convert.ToInt32(Console.ReadLine()));
+                Tour tour = new Tour();
+
+                tour.TourCalc();
+
+                Console.Write("\nВведите страну: ");
+                string country = Console.ReadLine();
+                tour.TourCalc(country);
+
+                Console.Write("\nВведите страну: ");
+                string country2 = Console.ReadLine();
+                Console.Write("Введите количество дней: ");
+                int days = Convert.ToInt32(Console.ReadLine());
+                tour.TourCalc(country2, days);
             }
-
-            Console.WriteLine("\nИсходный массив:");
-            myArray.Print();
-
-            myArray.Sort();
-            Console.WriteLine("Отсортированный массив:");
-            myArray.Print();
-
-            Console.WriteLine("Максимум: " + myArray.FindMax());
-            Console.WriteLine("Минимум: " + myArray.FindMin());
-            Console.WriteLine("Среднее значение: " + String.Format("{0:F2}", myArray.FindAverage()));
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: дни должны быть числом!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
         }
     }
 }
