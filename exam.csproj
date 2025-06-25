@@ -43,7 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library.cs" />
+    <Compile Include="DerivedClass.cs" />
+    <Compile Include="IInterface1.cs" />
+    <Compile Include="IInterface2.cs" />
+    <Compile Include="IInterface3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
