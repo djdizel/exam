@@ -10,13 +10,17 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите радиус окружности: ");
-            double radius = Convert.ToDouble(Console.ReadLine());
+            Tovar[] tovars = new Tovar[3];
+            tovars[0] = new Obuv("Кроссовки", 5000, 42, 2);
+            tovars[1] = new Odejda("Футболка", 1000, "Синий", 5);
+            tovars[2] = new Posuda("Тарелка", 200, 0.5, 10);
 
-            Circle circle = new Circle(radius);
-
-            Console.WriteLine("Площадь окружности: " + String.Format("{0:F2}", circle.CalculateArea()));
-            Console.WriteLine("Длина окружности: " + String.Format("{0:F2}", circle.CalculateCircumference()));
+            int i;
+            for (i = 0; i < tovars.Length; i++)
+            {
+                Console.WriteLine("Товар " + (i + 1) + ":");
+                tovars[i].Print();
+            }
         }
     }
 }
