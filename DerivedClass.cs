@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace exam
 {
-    internal class Program
+    class DerivedClass : IInterface
     {
-        static void Main(string[] args)
+        public void Method()
         {
-            DerivedClass dClass = new DerivedClass();
-            dClass.Method();
+            Console.WriteLine("Метод, реализованный в классе DerivedClass");
         }
     }
 }
