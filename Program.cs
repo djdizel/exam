@@ -10,23 +10,33 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите количество магазинов: ");
-            int n = Convert.ToInt32(Console.ReadLine());
-
-            Shop[] shops = new Shop[n];
-            int i;
-            for (i = 0; i < n; i++)
+            try
             {
-                Console.WriteLine("\nВведите данные для магазина " + (i + 1) + ":");
-                shops[i] = new Shop("", "", "");
-                shops[i].Input();
+                Tovar[] tovars = new Tovar[2];
+                tovars[0] = new Tovar("Книга", 15, 5);
+                tovars[1] = new Tovar("Ручка", 2, 8);
+
+                double totalCost = 0;
+                int i;
+                for (i = 0; i < tovars.Length; i++)
+                {
+                    double cost = tovars[i].CalculateCost();
+                    totalCost += cost;
+                    Console.WriteLine("Товар: " + tovars[i].Name);
+                    Console.WriteLine("Цена: " + String.Format("{0:F2}", tovars[i].Price));
+                    Console.WriteLine("Количество: " + tovars[i].Kvo);
+                    Console.WriteLine("Стоимость: " + String.Format("{0:F2}", cost));
+                    Console.WriteLine();
+                }
+                Console.WriteLine("Общая стоимость: " + String.Format("{0:F2}", totalCost));
             }
-
-            Console.WriteLine("\nИнформация о магазинах:");
-            for (i = 0; i < n; i++)
+            catch (ArgumentException ex)
             {
-                Console.WriteLine("Магазин " + (i + 1) + ":");
-                shops[i].ShowInfo();
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
             }
         }
     }
