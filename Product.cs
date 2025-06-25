@@ -9,33 +9,59 @@ namespace exam
     class Product
     {
         private string name;
+        private string manufacturer;
         private double price;
+        private int shelfLife;
         private int quantity;
 
-        public Product(string name, double price, int quantity)
+        public string Name
         {
-            this.name = name;
-            this.price = price;
-            this.quantity = quantity;
+            get { return name; }
+            set { name = value; }
         }
 
-        public double CalculateTotalCost()
+        public string Manufacturer
         {
-            return price * quantity;
-        }
-
-        public void ShowInfo()
-        {
-            Console.WriteLine("Название: " + name);
-            Console.WriteLine("Цена: " + String.Format("{0:F2}", price));
-            Console.WriteLine("Количество: " + quantity);
-            Console.WriteLine("Общая стоимость: " + String.Format("{0:F2}", CalculateTotalCost()));
-            Console.WriteLine();
+            get { return manufacturer; }
+            set { manufacturer = value; }
         }
 
         public double Price
         {
             get { return price; }
+            set { price = value; }
+        }
+
+        public int ShelfLife
+        {
+            get { return shelfLife; }
+            set { shelfLife = value; }
+        }
+
+        public int Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
+
+        public Product(string name, string manufacturer, double price, int shelfLife, int quantity)
+        {
+            this.name = name;
+            this.manufacturer = manufacturer;
+            this.price = price;
+            this.shelfLife = shelfLife;
+            this.quantity = quantity;
+        }
+
+        public void ShowInfo()
+        {
+            Console.WriteLine("Наименование: " + name);
+            Console.WriteLine("Производитель: " + manufacturer);
+            Console.WriteLine("Цена: " + String.Format("{0:F2}", price));
+            Console.WriteLine("Срок хранения (дней): " + shelfLife);
+            Console.WriteLine("Количество: " + quantity);
+            Console.WriteLine();
         }
     }
+
 }

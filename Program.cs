@@ -10,36 +10,75 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите количество продуктов: ");
-            int n = Convert.ToInt32(Console.ReadLine());
-
-            Product[] products = new Product[n];
-            int i;
-            for (i = 0; i < n; i++)
+            try
             {
-                Console.WriteLine("\nВведите данные для продукта " + (i + 1) + ":");
-                Console.Write("Название: ");
-                string name = Console.ReadLine();
-                Console.Write("Цена: ");
-                double price = Convert.ToDouble(Console.ReadLine());
-                Console.Write("Количество: ");
-                int quantity = Convert.ToInt32(Console.ReadLine());
-
-                products[i] = new Product(name, price, quantity);
-            }
-
-            Console.WriteLine("\nПродукт с минимальной ценой:");
-            int minIndex = 0;
-            double minPrice = products[0].Price;
-            for (i = 1; i < n; i++)
-            {
-                if (products[i].Price < minPrice)
+                Product[] products = new Product[]
                 {
-                    minPrice = products[i].Price;
-                    minIndex = i;
+                    new Product("Молоко", "Молочный завод", 2.5, 10, 100),
+                    new Product("Хлеб", "Хлебозавод", 1.2, 5, 50),
+                    new Product("Молоко", "Ферма", 3.0, 15, 80)
+                };
+
+                Console.Write("Введите наименование товара: ");
+                string searchName = Console.ReadLine();
+                Console.WriteLine("\nТовары с наименованием '" + searchName + "':");
+                bool found = false;
+                int i;
+                for (i = 0; i < products.Length; i++)
+                {
+                    if (products[i].Name == searchName)
+                    {
+                        products[i].ShowInfo();
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("Товары не найдены.");
+                }
+
+                Console.Write("\nВведите максимальную цену: ");
+                double maxPrice = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Товары с наименованием '" + searchName + "' и ценой не выше " + maxPrice + ":");
+                found = false;
+                for (i = 0; i < products.Length; i++)
+                {
+                    if (products[i].Name == searchName && products[i].Price <= maxPrice)
+                    {
+                        products[i].ShowInfo();
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("Товары не найдены.");
+                }
+
+                Console.Write("\nВведите минимальный срок хранения (дней): ");
+                int minShelfLife = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Товары со сроком хранения больше " + minShelfLife + " дней:");
+                found = false;
+                for (i = 0; i < products.Length; i++)
+                {
+                    if (products[i].ShelfLife > minShelfLife)
+                    {
+                        products[i].ShowInfo();
+                        found = true;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("Товары не найдены.");
                 }
             }
-            products[minIndex].ShowInfo();
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: введено не число!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
         }
     }
 }
