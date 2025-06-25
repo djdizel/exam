@@ -6,28 +6,36 @@ using System.Threading.Tasks;
 
 namespace exam
 {
-    class Counter
+    enum Colors
     {
-        private int count;
-
-        public Counter(int initialCount)
+        Красный,
+        Синий,
+        Зелёный
+    }
+    static class Printer
+    {
+        public static void Print(string stroka, int color)
         {
-            count = initialCount;
-        }
+            if (color < 0 || color > 2)
+            {
+                throw new ArgumentException("Недопустимый номер цвета!");
+            }
 
-        public void Increment()
-        {
-            count = count + 1;
-        }
+            if (color == (int)Colors.Красный)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else if (color == (int)Colors.Синий)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+            }
+            else if (color == (int)Colors.Зелёный)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
 
-        public void Decrement()
-        {
-            count = count - 1;
-        }
-
-        public int Count
-        {
-            get { return count; }
+            Console.WriteLine(stroka);
+            Console.ResetColor();
         }
     }
 }
