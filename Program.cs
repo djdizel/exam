@@ -10,18 +10,27 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите начальное значение счётчика: ");
-            int initialCount = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                Console.Write("Введите строку: ");
+                string text = Console.ReadLine();
+                Console.Write("Выберите цвет (0 - Красный, 1 - Синий, 2 - Зелёный): ");
+                int color = Convert.ToInt32(Console.ReadLine());
 
-            Counter counter = new Counter(initialCount);
-
-            Console.WriteLine("Текущее значение счётчика: " + counter.Count);
-            counter.Increment();
-            Console.WriteLine("После увеличения: " + counter.Count);
-            counter.Increment();
-            Console.WriteLine("После ещё одного увеличения: " + counter.Count);
-            counter.Decrement();
-            Console.WriteLine("После уменьшения: " + counter.Count);
+                Printer.Print(text, color);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: цвет должен быть числом!");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
         }
     }
 }
