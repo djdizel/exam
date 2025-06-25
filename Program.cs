@@ -10,61 +10,96 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите количество строк первой матрицы: ");
-            int rows1 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите количество столбцов первой матрицы: ");
-            int cols1 = Convert.ToInt32(Console.ReadLine());
-
-            MyMatrix matrix1 = new MyMatrix(rows1, cols1);
-            int i, j;
-            for (i = 0; i < rows1; i++)
+            try
             {
-                for (j = 0; j < cols1; j++)
+                List<TouristFirm> firms = new List<TouristFirm>
                 {
-                    Console.Write("Введите элемент [" + i + "," + j + "]: ");
-                    matrix1.SetElement(i, j, Convert.ToDouble(Console.ReadLine()));
+                    new TouristFirm("Тур1", 2010, "1234567890", 100000),
+                    new TouristFirm("Тур2", 2015, "0987654321", 150000),
+                    new TouristFirm("Тур3", 2020, "1122334455", 80000)
+                };
+
+                Console.WriteLine("Список фирм:");
+                int i;
+                for (i = 0; i < firms.Count; i++)
+                {
+                    firms[i].ShowInfo();
+                }
+
+                Console.Write("Введите название фирмы для поиска: ");
+                string searchName = Console.ReadLine();
+                bool found = false;
+                for (i = 0; i < firms.Count; i++)
+                {
+                    if (firms[i].Name == searchName)
+                    {
+                        Console.WriteLine("\nНайдена фирма:");
+                        firms[i].ShowInfo();
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("Фирма не найдена.");
+                }
+
+                double totalProfit = 0;
+                int maxProfitIndex = 0;
+                for (i = 0; i < firms.Count; i++)
+                {
+                    totalProfit += firms[i].Profit;
+                    if (firms[i].Profit > firms[maxProfitIndex].Profit)
+                    {
+                        maxProfitIndex = i;
+                    }
+                }
+                Console.WriteLine("Суммарная прибыль: " + String.Format("{0:F2}", totalProfit));
+                Console.WriteLine("\nФирма с максимальной прибылью:");
+                firms[maxProfitIndex].ShowInfo();
+
+                Console.Write("Введите название фирмы для удаления: ");
+                string removeName = Console.ReadLine();
+                found = false;
+                for (i = 0; i < firms.Count; i++)
+                {
+                    if (firms[i].Name == removeName)
+                    {
+                        firms.RemoveAt(i);
+                        found = true;
+                        Console.WriteLine("Фирма удалена.");
+                        break;
+                    }
+                }
+                if (!found)
+                {
+                    Console.WriteLine("Фирма не найдена.");
+                }
+
+                Console.WriteLine("\nДобавление новой фирмы:");
+                Console.Write("Название: ");
+                string newName = Console.ReadLine();
+                Console.Write("Год создания: ");
+                int newYear = Convert.ToInt32(Console.ReadLine());
+                Console.Write("ИНН: ");
+                string newInn = Console.ReadLine();
+                Console.Write("Прибыль: ");
+                double newProfit = Convert.ToDouble(Console.ReadLine());
+                firms.Add(new TouristFirm(newName, newYear, newInn, newProfit));
+
+                Console.WriteLine("\nОбновлённый список фирм:");
+                for (i = 0; i < firms.Count; i++)
+                {
+                    firms[i].ShowInfo();
                 }
             }
-
-            Console.Write("Введите количество строк второй матрицы: ");
-            int rows2 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите количество столбцов второй матрицы: ");
-            int cols2 = Convert.ToInt32(Console.ReadLine());
-
-            MyMatrix matrix2 = new MyMatrix(rows2, cols2);
-            for (i = 0; i < rows2; i++)
+            catch (FormatException)
             {
-                for (j = 0; j < cols2; j++)
-                {
-                    Console.Write("Введите элемент [" + i + "," + j + "]: ");
-                    matrix2.SetElement(i, j, Convert.ToDouble(Console.ReadLine()));
-                }
+                Console.WriteLine("Ошибка: введено не число!");
             }
-
-            Console.WriteLine("\nПервая матрица:");
-            matrix1.Print();
-            Console.WriteLine("\nВторая матрица:");
-            matrix2.Print();
-
-            MyMatrix sum = matrix1.Add(matrix2);
-            if (sum != null)
+            catch (Exception ex)
             {
-                Console.WriteLine("\nСумма матриц:");
-                sum.Print();
-            }
-
-            MyMatrix diff = matrix1.Subtract(matrix2);
-            if (diff != null)
-            {
-                Console.WriteLine("\nРазность матриц:");
-                diff.Print();
-            }
-
-            MyMatrix product = matrix1.Multiply(matrix2);
-            if (product != null)
-            {
-                Console.WriteLine("\nПроизведение матриц:");
-                product.Print();
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
             }
         }
     }
