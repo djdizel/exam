@@ -10,18 +10,27 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите первое число: ");
-            double num1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите второе число: ");
-            double num2 = Convert.ToDouble(Console.ReadLine());
+            try
+            {
+                Console.Write("Введите модель ноутбука: ");
+                string model = Console.ReadLine();
+                Console.Write("Введите производителя: ");
+                string manufacturer = Console.ReadLine();
+                Console.Write("Введите цену: ");
+                double price = Convert.ToDouble(Console.ReadLine());
 
-            Numbers numbers = new Numbers(num1, num2);
-
-            Console.WriteLine("Сложение: " + String.Format("{0:F2}", numbers.Add()));
-            Console.WriteLine("Вычитание: " + String.Format("{0:F2}", numbers.Subtract()));
-            Console.WriteLine("Умножение: " + String.Format("{0:F2}", numbers.Multiply()));
-            Console.WriteLine("Деление: " + String.Format("{0:F2}", numbers.Divide()));
-            Console.WriteLine(numbers.Compare());
+                Notebook notebook = new Notebook(model, manufacturer, price);
+                Console.WriteLine("\nИнформация о ноутбуке:");
+                notebook.ShowInfo();
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: цена должна быть числом!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
         }
     }
 }
