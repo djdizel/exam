@@ -6,28 +6,63 @@ using System.Threading.Tasks;
 
 namespace exam
 {
+    delegate double AverageDelegate(int m, int n);
+
     internal class Program
     {
+        static double Average(int m, int n)
+        {
+            if (m > n)
+            {
+                int temp = m;
+                m = n;
+                n = temp;
+            }
+            int count = n - m + 1;
+            double sum = 0;
+            int i;
+            for (i = m; i <= n; i++)
+            {
+                sum += i;
+            }
+            return sum / count;
+        }
+
         static void Main(string[] args)
         {
-            Console.Write("Введите x для первого вектора: ");
-            double x1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите y для первого вектора: ");
-            double y1 = Convert.ToDouble(Console.ReadLine());
+            AverageDelegate avgDelegate = new AverageDelegate(Average);
 
-            Console.Write("Введите x для второго вектора: ");
-            double x2 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите y для второго вектора: ");
-            double y2 = Convert.ToDouble(Console.ReadLine());
+            try
+            {
+                Console.WriteLine("Вычисление 1:");
+                Console.Write("Введите m: ");
+                int m1 = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Введите n: ");
+                int n1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Среднее арифметическое: " + String.Format("{0:F2}", avgDelegate(m1, n1)));
 
-            Vector vector1 = new Vector(x1, y1);
-            Vector vector2 = new Vector(x2, y2);
+                Console.WriteLine("\nВычисление 2:");
+                Console.Write("Введите m: ");
+                int m2 = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Введите n: ");
+                int n2 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Среднее арифметическое: " + String.Format("{0:F2}", avgDelegate(m2, n2)));
 
-            Console.WriteLine("\nПервый вектор:");
-            vector1.ShowInfo();
-            Console.WriteLine("\nВторой вектор:");
-            vector2.ShowInfo();
-            Console.WriteLine("\nСкалярное произведение: " + String.Format("{0:F2}", vector1.ScalarProduct(vector2)));
+                Console.WriteLine("\nВычисление 3:");
+                Console.Write("Введите m: ");
+                int m3 = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Введите n: ");
+                int n3 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Среднее арифметическое: " + String.Format("{0:F2}", avgDelegate(m3, n3)));
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Ошибка: введено не число!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
         }
     }
 }
