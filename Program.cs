@@ -10,35 +10,26 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите часы для первого времени: ");
-            int h1 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите минуты для первого времени: ");
-            int m1 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите секунды для первого времени: ");
-            int s1 = Convert.ToInt32(Console.ReadLine());
+            try
+            {
+                Tovar[] tovars = new Tovar[]
+                {
+                    new Obuv("Кроссовки", 100, 2, 42),
+                    new Odejda("Футболка", 20, 5, "Синий"),
+                    new Tovar("Книга", 10, 3)
+                };
 
-            Time time1 = new Time(h1, m1, s1);
-
-            Console.Write("Введите часы для второго времени: ");
-            int h2 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите минуты для второго времени: ");
-            int m2 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Введите секунды для второго времени: ");
-            int s2 = Convert.ToInt32(Console.ReadLine());
-
-            Time time2 = new Time(h2, m2, s2);
-
-            Console.WriteLine("\nПервое время: ");
-            time1.ShowTime();
-            Console.WriteLine("В секундах: " + time1.ToSeconds());
-
-            Console.WriteLine("\nВторое время: ");
-            time2.ShowTime();
-            Console.WriteLine("В секундах: " + time2.ToSeconds());
-
-            Console.WriteLine("\nСумма времён: ");
-            Time sum = time1.Add(time2);
-            sum.ShowTime();
+                int i;
+                for (i = 0; i < tovars.Length; i++)
+                {
+                    Console.WriteLine("Товар " + (i + 1) + ":");
+                    tovars[i].ShowInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
+            }
         }
     }
 }
