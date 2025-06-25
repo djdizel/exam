@@ -10,23 +10,25 @@ namespace exam
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите первую сторону треугольника: ");
-            double side1 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите вторую сторону треугольника: ");
-            double side2 = Convert.ToDouble(Console.ReadLine());
-            Console.Write("Введите третью сторону треугольника: ");
-            double side3 = Convert.ToDouble(Console.ReadLine());
+            List<Person> peopleList = new List<Person>();
+            peopleList.Add(new Person("Иван", 25));
+            peopleList.Add(new Person("Анна", 30));
+            peopleList.Add(new Person("Борис", 22));
+            peopleList.Add(new Person("Елена", 28));
 
-            Triangle triangle = new Triangle(side1, side2, side3);
+            SortedSet<Person> peopleSet = new SortedSet<Person>(peopleList);
 
-            if (triangle.Exists())
+            Console.WriteLine("Список людей, отсортированный по имени:");
+            peopleList.Sort();
+            foreach (Person p in peopleList)
             {
-                Console.WriteLine("Треугольник существует.");
-                Console.WriteLine("Площадь треугольника: " + String.Format("{0:F2}", triangle.CalculateArea()));
+                Console.WriteLine(p);
             }
-            else
+
+            Console.WriteLine("\nМножество людей, отсортированное по имени:");
+            foreach (Person p in peopleSet)
             {
-                Console.WriteLine("Треугольник не существует.");
+                Console.WriteLine(p);
             }
         }
     }
